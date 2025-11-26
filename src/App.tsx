@@ -2,7 +2,10 @@
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'*/
 import './App.css'
-import { Grid } from '@mui/material'
+import { Alert, Grid } from '@mui/material'
+import HeaderUI from "./components/HeaderUI";
+import AlertUI from "./components/AlertUI";
+
 
 function App() {
   //const [count, setCount] = useState(0)
@@ -13,10 +16,14 @@ function App() {
          <Grid size={ {
             xs:12,
             md:12
-          } }>Elemento: Encabezado</Grid>
+          } }> 
+            <HeaderUI/> 
+          </Grid>
 
          {/* Alertas */}
-         <Grid size={{xs:12,md:12}} >Elemento: Alertas</Grid>
+         <Grid container justifyContent="center" alignItems="center" > 
+            <AlertUI description="No se preveen lluvias"/> 
+          </Grid>
 
          {/* Selector */}
          <Grid size={{xs:12,md:3}}>Elemento: Selector</Grid>
