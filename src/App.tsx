@@ -2,7 +2,7 @@
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'*/
 import './App.css'
-import { Alert, Grid} from '@mui/material'
+import {Grid} from '@mui/material'
 import HeaderUI from "./components/HeaderUI";
 import AlertUI from "./components/AlertUI";
 import SelectorUI from './components/SelectorUI';
