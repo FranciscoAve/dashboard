@@ -13,7 +13,7 @@ export default function useFetchData() : OpenMeteoResponse | undefined {
                 const data_enJson = await data_fetch.json();
                 setData(data_enJson);
             }
-        )       
+        ) ();      
     }, []);
 
     return data;
