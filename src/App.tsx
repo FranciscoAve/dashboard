@@ -15,6 +15,27 @@ function App() {
   //const [count, setCount] = useState(0)
   const dataFetcherOutput = useFetchData();
 
+  if(dataFetcherOutput.loading){
+    return (
+      <Grid container justifyContent="center" alignItems="center" sx={{ minHeight: '100vh' }}>
+        <Grid>
+          <h2>Cargando datos del clima...</h2>
+        </Grid>
+      </Grid>
+    );
+  }
+
+  if (dataFetcherOutput.error) {
+    return (
+      <Grid container justifyContent="center" alignItems="center" sx={{ minHeight: '100vh' }}>
+        <Grid>
+          <h2>Error al cargar datos</h2>
+          <p>{`${dataFetcherOutput.error.message}`}</p>
+        </Grid>
+      </Grid>
+    );
+  }
+
   return(
       <Grid container spacing={5} justifyContent="center" alignItems="center">
       {/* Encabezado */}
@@ -38,19 +59,19 @@ function App() {
          {/* Indicadores */}
          <Grid container size={{xs:12,md:9}}>
                  <Grid size={{ xs: 12, md: 3 }}>
-                     {dataFetcherOutput &&
+                     {dataFetcherOutput.data &&
                               (<IndicatorUI
                               title='Temperatura (2m)'
-                              description={ `${dataFetcherOutput.current.temperature_2m} ${dataFetcherOutput.current_units.temperature_2m}` } />)
+                              description={ `${dataFetcherOutput.data.current.temperature_2m} ${dataFetcherOutput.data.current_units.temperature_2m}` } />)
                       } 
                  </Grid>
 
                  <Grid size={{xs:12,md:3}}>
                       {/* temperatura aparente */
-                        dataFetcherOutput &&
+                        dataFetcherOutput.data &&
                         (<IndicatorUI 
                           title='Temperatura aparente °C'
-                          description={`${dataFetcherOutput.current.apparent_temperature} ${dataFetcherOutput.current_units.apparent_temperature}`}
+                          description={`${dataFetcherOutput.data.current.apparent_temperature} ${dataFetcherOutput.data.current_units.apparent_temperature}`}
                         />)
                       }
 
@@ -59,19 +80,19 @@ function App() {
                  <Grid size={{ xs: 12, md: 3 }}>
                      {
                      /* IndicatorUI con la Velocidad del viento en km/h' */
-                     dataFetcherOutput && 
+                     dataFetcherOutput.data && 
                      (<IndicatorUI 
                         title='Velocidad de viento(km/h)' 
-                        description={`${dataFetcherOutput.current.wind_speed_10m} ${dataFetcherOutput.current_units.wind_speed_10m}`}   
+                        description={`${dataFetcherOutput.data.current.wind_speed_10m} ${dataFetcherOutput.data.current_units.wind_speed_10m}`}   
                      />)
                      }
                  </Grid>
 
                  <Grid size={{ xs: 12, md: 3 }}>
                      {/* IndicatorUI con la Humedad relativa en %' */
-                     dataFetcherOutput &&
+                     dataFetcherOutput.data &&
                      (<IndicatorUI title='Humedad relativa'
-                        description={`${dataFetcherOutput.current.relative_humidity_2m} ${dataFetcherOutput.current_units.relative_humidity_2m}`}
+                        description={`${dataFetcherOutput.data.current.relative_humidity_2m} ${dataFetcherOutput.data.current_units.relative_humidity_2m}`}
                      />)
                      }
                  </Grid>
