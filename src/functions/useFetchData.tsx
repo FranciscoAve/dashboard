@@ -13,7 +13,7 @@ export default function useFetchData() : FetchDataReturn{
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<Error | undefined>();
 
-    const url = 'https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,relative_humidity_2m,apparent_temperature,wind_speed_10m&timezone=America%2FChicago';
+    const url = 'https://api.open-meteo.com/v1/forecast?latitude=-2.1463&longitude=-79.9638&hourly=temperature_2m,wind_speed_10m&current=temperature_2m,relative_humidity_2m,apparent_temperature,wind_speed_10m';
 
     useEffect(()=>{
         ( async ()=>{
@@ -21,7 +21,7 @@ export default function useFetchData() : FetchDataReturn{
                             const data_fetch= await fetch(url);
                             const data_enJson = await data_fetch.json();
                             //espera pa que se muestre mas loading
-                            await new Promise(resolve => setTimeout(resolve, 1000));
+                            //await new Promise(resolve => setTimeout(resolve, 1000));
                             setData(data_enJson);
                         }catch(error){
                             setError(error as Error);

@@ -1,5 +1,5 @@
 {
-  "homepage": "https://<FranciscoAve>.github.io/dashboard", 
+  "homepage": "https://<FranciscoAve>.github.io/dashboard",
   "name": "dashboard",
   "private": true,
   "version": "0.0.0",
@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "vite",
     "predeploy": "npm run build",
-    "deploy":"gh-pages -d dist",
+    "deploy": "gh-pages -d dist",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
@@ -16,6 +16,10 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mui/material": "^7.3.5",
+    "@mui/x-charts": "^8.21.0",
+    "@mui/x-data-grid": "^8.21.0",
+    "install": "^0.13.0",
+    "npm": "^11.6.4",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },

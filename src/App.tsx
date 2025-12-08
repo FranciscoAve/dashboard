@@ -8,12 +8,21 @@ import AlertUI from "./components/AlertUI";
 import SelectorUI from './components/SelectorUI';
 import IndicatorUI from './components/IndicatorUI';
 import useFetchData from './functions/useFetchData';
+import TableUI from './components/TableUI';
+import ChartUI from './components/ChartUI';
+
 
 
 
 function App() {
   //const [count, setCount] = useState(0)
   const dataFetcherOutput = useFetchData();
+
+  const data = dataFetcherOutput.data;
+  
+  const tiempo = data?.hourly.time.slice(0,24).map((t:string) =>{
+    return new Date(t).getHours() + ':00';
+  });
 
   if(dataFetcherOutput.loading){
     return (
@@ -104,7 +113,9 @@ function App() {
               xs:"none", 
               md:"block"
             }
-          } }>Elemento: Gráfico</Grid>
+          } }>
+            <ChartUI temperatures={data?.hourly.temperature_2m.slice(0,24)} velocidadViento={data?.hourly.wind_speed_10m.slice(0,24)} tiempo={tiempo} temperatureUnits={data?.hourly_units.temperature_2m} velocidadVUnits={data?.hourly_units.wind_speed_10m}/>
+          </Grid>
 
          {/* Tabla */}
          <Grid size={{xs:12,md:6}} sx={ {
@@ -112,7 +123,9 @@ function App() {
               xs:"none", 
               md:"block"
             }
-          } }>Elemento: Tabla</Grid>
+          } }>
+            {/*<TableUI />*/}
+          </Grid>
 
          {/* Información adicional */}
          <Grid size={{xs:12,md:12}}>Elemento: Información adicional</Grid>
