@@ -8,7 +8,7 @@ import AlertUI from "./components/AlertUI";
 import SelectorUI from './components/SelectorUI';
 import IndicatorUI from './components/IndicatorUI';
 import useFetchData from './functions/useFetchData';
-import TableUI from './components/TableUI';
+// import TableUI from './components/TableUI';
 import ChartUI from './components/ChartUI';
 
 
@@ -19,7 +19,7 @@ function App() {
   const dataFetcherOutput = useFetchData();
 
   const data = dataFetcherOutput.data;
-  
+
   const tiempo = data?.hourly.time.slice(0,24).map((t:string) =>{
     return new Date(t).getHours() + ':00';
   });
