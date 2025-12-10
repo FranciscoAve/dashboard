@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 import { DataGrid, type GridColDef } from '@mui/x-data-grid';
 
-function combineArrays(arrLabels: Array<string>, arrValues1: Array<number>, arrValues2: Array<number>) {
+function combineArrays(arrLabels: Array<number>, arrValues1: Array<number>, arrValues2: Array<string>) {
    return arrLabels.map((label, index) => ({
       id: index,
       label: label,
@@ -38,13 +38,17 @@ const columns: GridColDef[] = [
    },
 ];
 
-const arrValues1 = [4000, 3000, 2000, 2780, 1890, 2390, 3490];
-const arrValues2 = [2400, 1398, 9800, 3908, 4800, 3800, 4300];
-const arrLabels = ['A','B','C','D','E','F','G'];
+// const arrValues1 = [4000, 3000, 2000, 2780, 1890, 2390, 3490];
+// const arrValues2 = [2400, 1398, 9800, 3908, 4800, 3800, 4300];
+// const arrLabels = ['A','B','C','D','E','F','G'];
+type TableUIProps = {
+   temperatures: number[] | undefined;
+   velocidadViento: number[] | undefined;
+   tiempo: string[] | undefined;
+}
+export default function TableUI({ temperatures, velocidadViento, tiempo }: TableUIProps) {
 
-export default function TableUI() {
-
-   const rows = combineArrays(arrLabels, arrValues1, arrValues2);
+   const rows = combineArrays(temperatures ?? [], velocidadViento ?? [], tiempo ?? [] );
 
    return (
       <Box sx={{ height: 350, width: '100%' }}>

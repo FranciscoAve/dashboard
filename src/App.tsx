@@ -8,7 +8,7 @@ import AlertUI from "./components/AlertUI";
 import SelectorUI from './components/SelectorUI';
 import IndicatorUI from './components/IndicatorUI';
 import useFetchData from './functions/useFetchData';
-// import TableUI from './components/TableUI';
+import TableUI from './components/TableUI';
 import ChartUI from './components/ChartUI';
 
 
@@ -124,7 +124,7 @@ function App() {
               md:"block"
             }
           } }>
-            {/*<TableUI />*/}
+            <TableUI temperatures={data?.hourly.temperature_2m.slice(0,24)} velocidadViento={data?.hourly.wind_speed_10m.slice(0,24)} tiempo={tiempo}/>
           </Grid>
 
          {/* Información adicional */}

@@ -21,7 +21,6 @@ export default function ChartUI({temperatures, velocidadViento, tiempo, temperat
          </Typography>
          <LineChart
             height={300}
-            //width={800}
             series={[
                { data: temperatures, label: `Temperatura ${temperatureUnits}`},
                { data: velocidadViento, label: `Viento ${velocidadVUnits}`},
