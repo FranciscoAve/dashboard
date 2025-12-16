@@ -11,20 +11,20 @@ function combineArrays(arrLabels: Array<number>, arrValues1: Array<number>, arrV
 }
 
 const columns: GridColDef[] = [
-   { field: 'id', headerName: 'ID', width: 90 },
+   { field: 'id', headerName: 'ID', width: 50 },
    {
       field: 'label',
-      headerName: 'Label',
+      headerName: 'Temperatura °C',
       width: 125,
    },
    {
       field: 'value1',
-      headerName: 'Value 1',
+      headerName: 'Velocidad Viento km/h',
       width: 125,
    },
    {
       field: 'value2',
-      headerName: 'Value 2',
+      headerName: 'Tiempo',
       width: 125,
    },
    {
@@ -33,11 +33,25 @@ const columns: GridColDef[] = [
       description: 'No es posible ordenar u ocultar esta columna.',
       sortable: false,
       hideable: false,
-      width: 100,
-      valueGetter: (_, row) => `${row.label || ''} ${row.value1 || ''} ${row.value2 || ''}`,
+      width: 300,
+      valueGetter: (_,row) => valueGetter(row),
    },
 ];
 
+function valueGetter(row: any) {
+   const timeString = row.value2 || '0:00';
+   const hour = parseInt(timeString.split(':')[0]);
+   
+   if (hour === 0) {
+      return `La temperatura es de: ${row.label}°C a las 0:00 AM`;
+   } else if (hour < 12) {
+      return `La temperatura es de: ${row.label}°C a las ${hour}:00 AM`;
+   } else if (hour === 12) {
+      return `La temperatura es de: ${row.label}°C a las 12:00 PM`;
+   } else {
+      return `La temperatura es de: ${row.label}°C a las ${hour}:00 PM`;
+   }
+}
 // const arrValues1 = [4000, 3000, 2000, 2780, 1890, 2390, 3490];
 // const arrValues2 = [2400, 1398, 9800, 3908, 4800, 3800, 4300];
 // const arrLabels = ['A','B','C','D','E','F','G'];
