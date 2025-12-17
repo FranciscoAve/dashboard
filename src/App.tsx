@@ -1,5 +1,5 @@
-/*import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import { useState } from 'react'
+/*import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'*/
 import './App.css'
 import {Grid} from '@mui/material'
@@ -15,8 +15,12 @@ import ChartUI from './components/ChartUI';
 
 
 function App() {
-  //const [count, setCount] = useState(0)
-  const dataFetcherOutput = useFetchData();
+  // Utilice una variable de estado para almacenar la opción seleccionada por el usuario
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+
+  // Comunique la opción seleccionada al hook useFetchData
+  const dataFetcherOutput = useFetchData(selectedOption);
+
 
   const data = dataFetcherOutput.data;
 
@@ -62,7 +66,7 @@ function App() {
 
          {/* Selector */}
          <Grid size={{xs:12,md:3}}>
-            <SelectorUI/>
+            <SelectorUI onOptionSelect={setSelectedOption} />
          </Grid>
 
          {/* Indicadores */}
@@ -127,8 +131,8 @@ function App() {
             <TableUI temperatures={data?.hourly.temperature_2m.slice(0,24)} velocidadViento={data?.hourly.wind_speed_10m.slice(0,24)} tiempo={tiempo}/>
           </Grid>
 
-         {/* Información adicional */}
-         <Grid size={{xs:12,md:12}}>Elemento: Información adicional</Grid>
+         {/* Información adicional
+         <Grid>Elemento: Información adicional</Grid> */}
     </Grid>
     
   )

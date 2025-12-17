@@ -7,15 +7,32 @@ type FetchDataReturn = {
     error: Error | undefined;
 }
 
-export default function useFetchData() : FetchDataReturn{ 
+
+// Estrategia para convertir la opción seleccionada en un objeto
+const CITY_COORDS: Record<string, { latitude: number; longitude: number }> = {
+  'Guayaquil': { latitude: -2.0447, longitude: -79.908 },
+    'Quito': { latitude: -0.22985, longitude: -78.52495 },
+    'Manta': { latitude: -0.94937, longitude: -80.73137 },
+    'Cuenca': { latitude: -2.8953, longitude: -78.9963 },
+
+};
+
+export default function useFetchData(selectedOption:string|null) : FetchDataReturn{ 
 
     const [data, setData] = useState<OpenMeteoResponse | undefined>();
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<Error | undefined>();
 
-    const url = 'https://api.open-meteo.com/v1/forecast?latitude=-2.1463&longitude=-79.9638&hourly=temperature_2m,wind_speed_10m&current=temperature_2m,relative_humidity_2m,apparent_temperature,wind_speed_10m';
-
     useEffect(()=>{
+
+    // Parametrice la opción seleccionada en la URL del requerimiento asíncrono
+    const cityConfig = selectedOption != null? CITY_COORDS[selectedOption] : CITY_COORDS["Guayaquil"];
+    console.log("cityConfig:", cityConfig);
+    
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${cityConfig.latitude}&longitude=${cityConfig.longitude}&hourly=temperature_2m,wind_speed_10m&current=temperature_2m,relative_humidity_2m,apparent_temperature,wind_speed_10m`;
+
+    console.log("url:", url);
+
         ( async ()=>{
                         try{
                             const data_fetch= await fetch(url);
@@ -31,7 +48,7 @@ export default function useFetchData() : FetchDataReturn{
                 
                     }
         ) ();      
-    }, []);
+    }, [selectedOption]);
 
     return { data,loading,error };
 
